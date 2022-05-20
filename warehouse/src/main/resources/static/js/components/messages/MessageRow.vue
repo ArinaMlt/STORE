@@ -13,7 +13,6 @@
       <comment-list
       :comments="message.comments"
       :message-id="message.id"
-
       ></comment-list>
     </div>
   </div>

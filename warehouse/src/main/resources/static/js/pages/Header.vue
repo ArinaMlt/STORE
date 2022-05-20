@@ -4,7 +4,7 @@
     <nav>
       <a href="#">Приход</a>
       <a href="test">Расход</a>
-      <a href="#">Контрагенты</a>
+      <a href="contragentDemo">Контрагенты</a>
       <a href="report">Отчет</a>
     </nav>
   </header>
@@ -38,7 +38,7 @@ header nav {
    margin: 5px;
 }
 nav a{
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   padding: 10px;
   margin-left: 5px;
 }
@@ -51,6 +51,7 @@ nav a:hover{
   position: relative;
   display: flex;
   align-content: center;
-  border: 1px solid black;
+  width: 100%;
+  /*border: 1px solid black;*/
 }
 </style>
