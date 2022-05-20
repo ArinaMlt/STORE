@@ -1,5 +1,6 @@
 <template>
 <div>
+  {{comment.id}}
   {{comment.text}}
 </div>
 </template>

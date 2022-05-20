@@ -11,15 +11,16 @@
     </div>
     <div>
       <comment-list
-      :message-id="message.id"
       :comments="message.comments"
+      :message-id="message.id"
+
       ></comment-list>
     </div>
   </div>
 </template>
 <script>
-import {mapActions} from 'vuex'
-import CommentList from "../comment/CommentList.vue";
+import { mapActions } from 'vuex'
+import CommentList from "../comment/CommentList.vue"
 export default {
   components: { CommentList },
   props: ['message', 'editMessage'],

@@ -11,14 +11,16 @@
 </template>
 
 <script>
-import { mapActions} from "vuex"
+import { mapActions } from "vuex"
+import comment from "../../api/comment";
 
 export default {
   name: "CommentForm",
   props: ['messageId'],
   data() {
     return {
-      text: ''
+      text: '',
+      id: ''
     }
   },
   methods: {
@@ -30,7 +32,8 @@ export default {
           id: this.messageId
         }
       })
-      this.text = ''
+
+
 
     }
   }

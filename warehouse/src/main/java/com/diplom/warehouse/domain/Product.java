@@ -1,21 +1,23 @@
 package com.diplom.warehouse.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
+@Setter
+@Getter
 @Table
 @ToString(of = {"id", "name", "amount", "price"})
 @EqualsAndHashCode(of = {"id"})
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Long id;
 
-    public Long getId() {
+   /* public Long getId() {
         return id;
     }
 
@@ -47,7 +49,19 @@ public class Product {
         this.price = price;
     }
 
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
+    }*/
     private String name;
     private String amount;
     private String price;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDateTime localDateTime;
+
+
 }

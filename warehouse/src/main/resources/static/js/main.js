@@ -1,4 +1,5 @@
 import Vue from "vue"
+// import '@/styles/main.scss';
 import '@babel/polyfill'
 // import VueResource from 'vue-resource'
 import 'api/resource'

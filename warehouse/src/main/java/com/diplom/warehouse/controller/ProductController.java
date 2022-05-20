@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("product")
 public class ProductController {
     private final ProductRepo productRepo;
 
@@ -19,10 +19,10 @@ public class ProductController {
         this.productRepo = productRepo;
     }
 
-//    @GetMapping
-//    public List<Product> list(){
-//        return productRepo.findAll();
-//    }
+    @GetMapping
+    public List<Product> list(){
+        return productRepo.findAll();
+    }
 
     @GetMapping("{id}")
     public Product getOne(@PathVariable("id") Product product) {

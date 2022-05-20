@@ -8,9 +8,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        messages: frontendData.messages,
-        profile: frontendData.profile,
-        comments: frontendData.messages.comments
+        // messages: frontendData.messages,
+        messages: messages
+        // profile: frontendData.profile,
+        // comments: frontendData.messages.comments
 
     },
     getters: {
@@ -43,20 +44,30 @@ export default new Vuex.Store({
             }
         },
         addCommentMutation(state, comment) {
-            const updateIndex = state.messages.findIndex(item => item.id === comment.message.id)
 
+            /*state.messages = [
+                ...state.messages,
+                message
+            ]*/
+
+            const updateIndex = state.messages.findIndex(item => item.id === comment.message.id)
+console.log(updateIndex)
             const message = state.messages[updateIndex]
-            state.messages = [
-                ...state.messages.slice(0, updateIndex),
-                {
-                    ...message,
-                    comments: [
-                        ...message.comments,
-                        comment
-                    ]
-                },
-                ...state.messages.slice(updateIndex + 1)
-            ]
+            console.log(message)
+            if(!message.comments.find(it => it.id === comment.id)) {
+                state.messages = [
+                    ...state.messages.slice(0, updateIndex),
+                    {
+                        ...message,
+                        comments: [
+                            ...message.comments,
+                            comment
+                        ]
+                    },
+                    ...state.messages.slice(updateIndex + 1)
+                ]
+            }
+
         },
     },
     actions: {
@@ -86,7 +97,9 @@ export default new Vuex.Store({
         async addCommentAction({commit, state}, comment){
             const response = await commentsApi.add(comment)
             const data = await response.json()
-            commit('addCommentMutation', comment)
+            // commit('addCommentMutation', comment)
+            commit('addCommentMutation', data)
+
         }
     }
 })

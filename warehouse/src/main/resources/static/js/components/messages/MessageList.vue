@@ -1,6 +1,8 @@
 <template>
-  <div style="position: relative; width: 300px;">
+  <div>
+    <Header></Header>
     <div>
+
       <messages-form :messageAttr="message"/>
       <message-row v-for="message in messages"
                    :key="message.id"
@@ -14,9 +16,12 @@
 import { mapState } from "vuex"
 import MessageRow from 'components/messages/MessageRow.vue'
 import MessagesForm from 'components/messages/MessagesForm.vue'
+import Header from '../../pages/Header.vue'
+// import Header from "../../pages/Header";
 
 export default {
   components: {
+    Header,
     MessagesForm,
     MessageRow,
   },

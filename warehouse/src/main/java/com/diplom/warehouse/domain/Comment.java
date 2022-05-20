@@ -1,5 +1,6 @@
 package com.diplom.warehouse.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,6 +17,7 @@ public class Comment {
 
     private String text;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "message_id")
     private Message message;

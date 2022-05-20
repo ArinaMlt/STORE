@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Product</title>
@@ -9,6 +9,8 @@
 </head>
 <body>
 <div>Product</div>
-<div id="app"></div>
+<div id="one">{{ message }}</div>
+<script th:src="'http://localhost:8000/product.js'"></script>
+<!--<script src="./js/product.js"></script>-->
 </body>
 </html>

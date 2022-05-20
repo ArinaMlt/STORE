@@ -11,7 +11,7 @@
 </template>
 <script>
 // import messagesApi from "api/messages";
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   props: ['messageAttr'],
