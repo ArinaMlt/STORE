@@ -1,7 +1,7 @@
 <template xmlns="http://www.w3.org/1999/html">
   <div>
     <Header></Header>
-<!--    <h1>Contragents</h1>-->
+    <!--    <h1>Contragents</h1>-->
     <div class="listBlock">
       <div class="table">
         <table>
@@ -25,11 +25,11 @@
           <div>
             <h3>Контрагент: </h3>
             <p>ИМЯ</p>
-            <input type="text" placeholder="Input name">
+            <input type="text" placeholder="Input name" v-model="name">
             <p>ИНН</p>
-            <input type="text" placeholder="Input inn">
+            <input type="text" placeholder="Input inn" v-model="inn">
             <p>АДРЕС</p>
-            <input type="text" placeholder="Input address">
+            <input type="text" placeholder="Input address" v-model="address">
           </div>
           <input id="btn" type="button" value="Save" @click="save">
         </div>
@@ -40,7 +40,8 @@
 
 <script>
 import ContragentList from 'components/contragent/ContragentList.vue'
-import Header from "./Header.vue";
+import Header from "./Header.vue"
+import messagesApi from "../api/messages"
 
 export default {
   name: "Contragent",
@@ -51,7 +52,10 @@ export default {
         // {id: '1', name: 'one', inn: 'innOne', address: 'addressOne'},
         // {id: '2', name: 'two', inn: 'innTwo', address: 'addressTwo'},
         // {id: '3', name: 'three', inn: 'innThree', address: 'addressThree'}
-      ]
+      ],
+      name: '',
+      inn: '',
+      address: ''
     }
   },
   created() {
@@ -65,7 +69,19 @@ export default {
   },
   methods: {
     save() {
-
+      var message = {
+        name: this.name,
+        inn: this.inn,
+        address: this.address
+      };
+      this.$resource('/contragent{/id}').save({}, message).then(result =>
+          result.json().then(data => {
+            this.messages.push(data);
+            this.name = '',
+            this.inn = '',
+            this.address = ''
+          })
+      )
     }
   }
 }
@@ -75,7 +91,8 @@ export default {
 th, td {
   border: 1px solid black;
 }
-table{
+
+table {
   width: 1150px;
 }
 
@@ -103,7 +120,8 @@ table{
 #inputFORM * {
   /*border: 1px solid black;*/
 }
-#btn{
+
+#btn {
   margin-left: 50px;
   margin-top: 50px;
   margin-bottom: 10px;
@@ -114,7 +132,8 @@ table{
   padding-right: 20px;
   border: 1px solid #9b9b9b;
 }
-#btn:hover{
+
+#btn:hover {
   border: 1px solid black;
 }
 </style>

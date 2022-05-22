@@ -34,6 +34,11 @@ public class ContragentController {
         return contragentRepo.save(contragent);
     }
 
+    @PostMapping("filter")
+    public List<Contragent> filter(@RequestBody String name){
+        return contragentRepo.findByName(name);
+    }
+
     @PutMapping("{id}")
     public Contragent update(
             @PathVariable("id") Contragent contragentFromDb,

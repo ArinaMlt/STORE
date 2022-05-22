@@ -26,25 +26,30 @@
       <div class="column">
         <div class="column_name">
           <p class="id">id</p>
-          <p>name</p>
-          <p>amount</p>
-          <p>price</p>
-          <p>date</p>
+          <p class="name">name</p>
+          <p class="amount">amount</p>
+          <p class="price">price</p>
+          <p class="data">date</p>
         </div>
+
         <div class="column_data" v-for="message in messages">
           <div class="column_data_Price">
             <div class="id">{{ message.id }}</div>
-            <div id="name">{{ message.name }}</div>
-            <div>{{ message.amount }}</div>
-            <div>{{ message.price }}</div>
-            <div>data</div>
+            <div class="name">{{ message.contragent}}</div>
+            <div class="amount">{{ message.amount }}</div>
+            <div class="price">{{ message.price }}</div>
+            <div class="data">{{ message.date }}</div>
+<!--            <div class="data">date</div>-->
           </div>
-          <div class="column_data_product" v-for="product in products">
-            <div>{{ product.id }}</div>
-            <div>{{ product.text }}</div>
-          </div>
+
+<!--          <div class="column_data_product" v-for="product in products">
+            <div class="column_data_product_ID">{{ product.id }}</div>
+            <div class="column_data_product_TEXT">{{ product.text }}</div>
+          </div>-->
+
         </div>
       </div>
+
 
     </div>
     <div v-if="show" id="inputForm">
@@ -55,13 +60,22 @@
 
           <div class="headerInput">
             <p>Contragent</p>
-            <input type="text" placeholder="Input name">
+            <select name="contragent" v-model="contragent">
+              <option disabled value="">Выберите контрагента</option>
+              <option v-for="contragent in contragents" >
+                {{contragent.id}}
+              </option>
+            </select>
+
+<!--            <input type="text" placeholder="Input name" v-model="contragent">-->
+<!--            <input type="text" placeholder="Input name" v-model="contragent">-->
+
             <p>amount</p>
-            <input type="text" placeholder="Input amount">
+            <input type="text" placeholder="Input amount" v-model="amount">
             <p>price</p>
-            <input type="text" placeholder="Input price">
+            <input type="text" placeholder="Input price" v-model="price">
             <p>date</p>
-            <input type="text" placeholder="Input date">
+            <input type="date" placeholder="Input date" v-model="date">
           </div>
 
         <div class="bodyInput">
@@ -70,13 +84,13 @@
           <input id="add" value="Add" type="button" >
       </div>
 
-        <div class="products">
-          <div class="products_column" v-for="product in products">
-            <div>{{ product.id }}</div>
-            <div>{{ product.text }}</div>
-          </div>
-        </div>
-        <input id="btnForm" value="Input" type="button" @click="input">
+<!--        <div class="products">-->
+<!--          <div class="products_column" v-for="product in products">-->
+<!--            <div>{{ product.id }}</div>-->
+<!--            <div>{{ product.text }}</div>-->
+<!--          </div>-->
+<!--        </div>-->
+        <input id="btnForm" value="Input" type="button" @click="save">
 
       </div>
     </div>
@@ -87,22 +101,26 @@
 <script>
 import TestList from 'components/test/TestList.vue'
 import Header from "../../pages/Header.vue"
+// import contragent from "../../pages/Contragent";
 
 export default {
   name: "test",
   components: {Header, TestList},
-  data: function () {
+  data () {
     return {
       messages: [
         // {id: '1', name: 'one'}
       ],
-      products: [
-        {id: '1', text: 'one'},
-        {id: '2', text: 'two'},
-        {id: '3', text: 'three'},
-        {id: '4', text: 'four'},
+      contragents: [
+          // {id: '1', name: 'one', inn: 'inn', address: 'Lenin Street, 23'},
+          // {id: '1', name: 'two', inn: 'inn2', address: 'Lenin Street, 53'}
       ],
+      contragent: '',
+      amount: '',
+      price: '',
+      date: '',
       show: false
+      // show: true
     }
   },
   created() {
@@ -113,6 +131,13 @@ export default {
             data.forEach(message => this.messages.push(message))
         )
     )
+    this.$resource('/contragent{/id}').get().then(result =>
+        // console.log(result)
+        result.json().then(data =>
+            // console.log(data)
+            data.forEach(message => this.contragents.push(message))
+        )
+    )
   },
   methods: {
     input() {
@@ -120,12 +145,35 @@ export default {
     },
     exitForm() {
       this.show = false;
+    },
+    save() {
+      var message = {
+        contragent:{
+          id: this.contragent
+        },
+        amount: this.amount,
+        price: this.price,
+        date: this.date
+      };
+      console.log(this.contragent)
+
+      this.$resource('/product{/id}').save({}, message).then(result =>
+          result.json().then(data => {
+            // console.log(data)
+            this.messages.push(data);
+            this.contragent = '',
+                this.amount = '',
+                this.price = '',
+                this.date = ''
+          })
+      )
     }
   }
 }
 </script>
 
 <style scoped>
+
 #main *{
   padding-bottom: 5px;
 }
@@ -141,29 +189,41 @@ export default {
 .column_name * {
   border: 1px solid black;
   padding: 5px;
-  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .column_data {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
 }
 
 .column_data_Price {
   background: #a4b3dc;
   display: inline-flex;
-  border: 1px solid black;
 }
-
-.column_data_product {
-  display: inline-flex;
-  border: 1px solid black;
-}
-
-.id {
+.column_data_Price *{
+  /*border: 1px solid black;*/
   padding: 5px;
-  border: 1px solid black;
+  margin-right: 5px;
+}
+.name {
+  width: 900px;
+}
+.id{
+  width: 20px;
+}
+.amount, .price{
+  width: 110px;
+}
+.data{
+  width: 120px;
+}
+
+.column_data_product *{
+  /*border: 1px solid black;*/
+  padding: 5px;
+  margin-right: 5px;
 }
 
 table {
@@ -173,24 +233,19 @@ table {
 
 .table {
   border: 1px solid black;
+  padding: 2px;
   /*width: 1300px;*/
   width: 100%;
   height: 400px;
   overflow: hidden;
+  overflow-y: scroll;
+
 }
 
-#name {
-  width: 800px;
-}
 
 th, td {
   border: 1px solid black;
 }
-
-/*#form {*/
-/*  border: 1px solid black;*/
-/*  display: inline-flex;*/
-/*}*/
 
 #inputForm {
   /*border: 1px solid black;*/
@@ -247,10 +302,7 @@ th, td {
   display: flex;
   flex-direction: column;
 }
-.products_column{
-  display: inline-flex;
-  /*border: 1px solid black;*/
-}
+
 .products_column *{
   padding-left: 10px;
 }

@@ -7,6 +7,9 @@ import Product from 'pages/Product.vue'
 import Test from 'components/test/Test.vue'
 import Report from 'pages/Report.vue'
 import Contragent from "pages/Contragent.vue"
+import Check from "../pages/Check.vue"
+import KontragentReport from "../pages/report/KontragentReport.vue";
+import Invoice from "../pages/Invoice.vue";
 
 Vue.use(VueRouter)
 
@@ -24,10 +27,13 @@ export default new VueRouter({
         { path: '/',  component: MessageList },
         { path: '/auth', component: Auth},
         { path: '/profile', component: Profile},
+        { path: '/checks', component: Check},
         { path: '/product', component: Product},
-        { path: '/contragentDemo', component: Contragent},
-        { path: '/test', component: Test},
+        { path: '/contragents', component: Contragent},
+        { path: '/prices', component: Test},
+        { path: '/invoices', component: Invoice},
         { path: '/report', component: Report},
+        { path: '/kontragentReport', component: KontragentReport},
         { path: '*', component: MessageList},
     ]
 })
