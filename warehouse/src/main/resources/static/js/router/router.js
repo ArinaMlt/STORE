@@ -10,6 +10,7 @@ import Contragent from "pages/Contragent.vue"
 import Check from "../pages/Check.vue"
 import KontragentReport from "../pages/report/KontragentReport.vue";
 import Invoice from "../pages/Invoice.vue";
+import PricesReport from "../pages/report/PricesReport.vue";
 
 Vue.use(VueRouter)
 
@@ -30,7 +31,7 @@ export default new VueRouter({
         { path: '/checks', component: Check},
         { path: '/product', component: Product},
         { path: '/contragents', component: Contragent},
-        { path: '/prices', component: Test},
+        { path: '/prices', component: PricesReport},
         { path: '/invoices', component: Invoice},
         { path: '/report', component: Report},
         { path: '/kontragentReport', component: KontragentReport},

@@ -50,7 +50,7 @@ header nav {
 }
 nav a{
   /*border: 1px solid black;*/
-  padding: 10px;
+  padding: 5px;
   margin-left: 5px;
 }
 nav a:hover{

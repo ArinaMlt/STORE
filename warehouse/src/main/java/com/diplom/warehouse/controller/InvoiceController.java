@@ -1,11 +1,13 @@
 package com.diplom.warehouse.controller;
 
+import com.diplom.warehouse.domain.Contragent;
 import com.diplom.warehouse.domain.Invoice;
 import com.diplom.warehouse.repo.InvoiceRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -34,13 +36,23 @@ public class InvoiceController {
         return invoiceRepo.save(invoice);
     }
 
+    @PostMapping("byDate")
+    public List<Invoice> byDate(@RequestBody String date){
+        LocalDate localDate = LocalDate.parse(date);
+        return invoiceRepo.findByDate(localDate);
+    }
+
     @PutMapping("{id}")
     public Invoice update(
             @PathVariable("id") Invoice invoiceFromDb,
             @RequestBody Invoice invoice){
-        BeanUtils.copyProperties(invoice, invoiceFromDb, "id");
+        invoiceFromDb.setContragent(invoice.getContragent());
+        invoiceFromDb.setTotalAmount(invoice.getTotalAmount());
+        invoiceFromDb.setTotalPrice(invoice.getTotalPrice());
+        invoiceFromDb.setDate(invoice.getDate());
+//        BeanUtils.copyProperties(invoice, invoiceFromDb, "id","products");
 
-        return invoiceRepo.save(invoice);
+        return invoiceRepo.save(invoiceFromDb);
     }
 
     @DeleteMapping("{id}")
