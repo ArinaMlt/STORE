@@ -39,13 +39,24 @@ public class ContragentController {
         return contragentRepo.findByName(name);
     }
 
-    @PutMapping("{id}")
+    /*@PutMapping("{id}")
     public Contragent update(
             @PathVariable("id") Contragent contragentFromDb,
             @RequestBody Contragent contragent){
         BeanUtils.copyProperties(contragent, contragentFromDb, "id");
 
         return contragentRepo.save(contragent);
+    }*/
+
+    @PutMapping("{id}")
+    public Contragent update(
+            @PathVariable("id") Contragent contragentFromDb,
+            @RequestBody Contragent contragent){
+        contragentFromDb.setName(contragent.getName());
+        contragentFromDb.setInn(contragent.getInn());
+        contragentFromDb.setAddress(contragent.getAddress());
+
+        return contragentRepo.save(contragentFromDb);
     }
 
     @DeleteMapping("{id}")

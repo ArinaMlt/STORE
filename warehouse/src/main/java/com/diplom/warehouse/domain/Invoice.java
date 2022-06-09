@@ -24,8 +24,11 @@ public class Invoice {
     @JoinColumn(name = "contragent_id")
     private Contragent contragent;
 
-    private String totalAmount;
-    private String totalPrice;
+    private Double totalAmount;
+    private Double totalPrice;
+    private Double totalValue;
+
+    private Boolean pay;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate date;
@@ -33,54 +36,5 @@ public class Invoice {
     @OneToMany(mappedBy = "invoice", orphanRemoval = true)
     private List<Product> products;
 
-    /*public void setProducts(List<Product> products){
-        this.products.clear();
-        if(products != null){
-            this.products.addAll(products);
-        }
-    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Contragent getContragent() {
-        return contragent;
-    }
-
-    public void setContragent(Contragent contragent) {
-        this.contragent = contragent;
-    }
-
-    public String getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(String totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public String getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(String totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }*/
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="column_data">
-    <div class="column_data_Price">
+    <div class="column_data_Price" @click="edit">
 
       <div class="id">{{ message.id }}</div>
       <div class="name">{{ message.contragent.name}}</div>
@@ -8,12 +8,14 @@
 <!--      <div class="amount" >{{ amount() }}</div>-->
       <div class="amount" >{{ message.totalAmount }}</div>
       <div class="price">{{ message.totalPrice }}</div>
-<!--      <div class="price">{{ price() }}</div>-->
+      <div class="amount" >{{ message.totalValue }}</div>
+
+      <!--      <div class="price">{{ price() }}</div>-->
 
       <div class="data">{{ message.date }}</div>
 
-      <input type="button" value="Edit" @click="edit"/>
-      <input type="button" value="X" @click="del"/>
+<!--      <input class="input_buttn_save" type="button" value="Edit" @click="edit"/>-->
+<!--      <input class="input_buttn_exit" type="button" value="x" @click="del"/>-->
       <!--            <div class="data">date</div>-->
     </div>
 
@@ -24,7 +26,7 @@
       <div class="column_data_product_TEXT">{{ product.productPrice }}</div>
     </div>-->
 
-    <Products :products="message.products"></Products>
+<!--    <Products :products="message.products"></Products>-->
 
     <div >
 
@@ -42,7 +44,7 @@ import Products from "../Products.vue";
 export default {
   name: "InvoiceRow",
   components: {Products},
-  props: ['message', 'editMethod', 'delMethod'],
+  props: ['message', 'editMethod'],
   data(){
     return{
       // amount: 0
@@ -66,10 +68,6 @@ export default {
   methods: {
     edit(){
       this.editMethod(this.message);
-    },
-    del(){
-      this.delMethod(this.message);
-      console.log(this.message.id);
     },
     amount(){
       // var products = this.message.products
@@ -110,8 +108,15 @@ export default {
 }
 
 .column_data_Price {
-  background: #a4b3dc;
+  /*background: rgba(189, 200, 232, 0.37);*/
+  background: white;
+  border-bottom: 1px solid rgba(133, 133, 133, 0.53);
   display: inline-flex;
+}
+.column_data_Price:hover{
+  /*background: rgba(164, 179, 220, 0.82);*/
+  background: rgba(189, 200, 232, 0.37);
+
 }
 .column_data_product {
   display: inline-flex;
@@ -125,10 +130,10 @@ export default {
 }
 
 .name {
-  width: 700px;
+  width: 500px;
 }
 .id{
-  width: 20px;
+  width: 30px;
 }
 .amount, .price{
   width: 110px;
@@ -143,14 +148,32 @@ export default {
   /*border: 1px solid black;*/
 }
 
-.column_data_Price {
+/*.column_data_Price {
   background: #a4b3dc;
   display: inline-flex;
-}
+}*/
 .column_data_Price * {
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   padding: 5px;
-  margin-right: 5px;
+  /*margin-right: 5px;*/
+}
+.input_buttn_exit{
+  /*background-color: rgba(255, 0, 0, 0.4);*/
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  height: 25px;
+  /*padding: 5px;*/
+}
+.input_buttn_exit:hover {
+  background-color: rgba(255, 0, 0, 0.47);
+}
+.input_buttn_save{
+  /*background: rgba(21, 148, 21, 0.29);*/
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  padding: 5px;
 }
 
 </style>

@@ -3,33 +3,35 @@
   <Header></Header>
   <div>
 
+    <div v-if="show" class="parent_input">
+      <div class="input">
+        <!--      <input class="name" type="text" placeholder="Наименование" v-model="name">-->
+<!--        <div>-->
+       <div class="input_exit_div">
+         <input  class="input_exit" type="button" value="X" @click="delForm">
+       </div>
 
-    <div class="search_form">
+        <select class="input_name" v-model="name">
+          <option>Терминал1</option>
+          <option>Терминал2</option>
+          <option>Наличные</option>
+        </select>
+<!--      </div>-->
 
-<!--      <v-select :options="invoice"/>-->
-<!--      <select name="invoice" v-model="invoice" >
-        <option disabled value="">Выберите</option>
+        <input  class="input_Date" type="date" placeholder="Дата"  v-model="date">
+        <input class="input_Sum" type="number" placeholder="Сумма" v-model="sum">
 
-        <option v-for="i in invoice">
-&lt;!&ndash;          {{ invoice.id }}&ndash;&gt;
-              {{i.id}}
-        </option>
-      </select>-->
+        <input  class="input_save" type="button" value="Сохранить" @click="save">
 
-
-      <input  type="date" placeholder="Дата" v-model="date1">
-      <input  type="date" placeholder="Дата" v-model="date2">
-      <input  class="search_form_btn" type="button" value="Поиск" @click="searching">
-
+      </div>
     </div>
 
-    <div class="input">
-      <input class="name" type="text" placeholder="Наименование" v-model="name">
-      <input class="tdSum" type="number" placeholder="Сумма" v-model="sum">
-      <input  class="tdDate" type="date" placeholder="Дата"  v-model="date">
-      <input  class="input_save" type="button" value="Save" @click="save">
-      <input  class="input_exit" type="button" value="X" @click="delForm">
-    </div>
+<div>
+  <input class="create_btn" id="input" value="Создать" type="button" @click="input">
+</div>
+
+
+
     <table>
       <tr>
         <th class="tdId">ID</th>
@@ -38,13 +40,13 @@
         <th>Дата</th>
         <th></th>
       </tr>
-      <tr v-for="check in checks">
+      <tr v-for="check in checks" @click="edit(check)">
         <td class="tdId">{{check.id}}</td>
         <td>{{check.name}}</td>
         <td class="tdSum">{{check.sum}}</td>
         <td class="tdDate">{{check.date}}</td>
         <td class="tdBtn">
-          <input class="edit" type="button" value="Edit" @click="edit(check)"/>
+<!--          <input class="edit" type="button" value="Edit" @click="edit(check)"/>-->
           <input class="del" type="button" value="X" @click="del(check)">
         </td>
       </tr>
@@ -62,6 +64,7 @@ export default {
   components: {Header},
   data(){
     return{
+      show: false,
       checks:[],
       date: new Date().toISOString().substr(0, 10),
       name: '',
@@ -109,12 +112,14 @@ export default {
       this.delForm()
     },
     delForm(){
+      this.show =false,
      this.id ='',
      this.name ='',
      this.sum = '',
      this.date = new Date().toISOString().substr(0, 10)
     },
     edit(check){
+      this.show = true,
       this.name = check.name,
           this.sum = check.sum,
           this.id = check.id,
@@ -130,14 +135,25 @@ export default {
     searching(){
 
       // var date = {date: this.date1}
-      var date =  this.date1
-      console.log(date)
-      this.$resource('/invoice/byDate').save({}, date).then(result =>
+      var message = {
+        data1:  this.date1,
+        date2:  this.date2
+      }
+      var message2 = (this.date1).toString() +'!'+ (this.date2).toString();
+      console.log(message2)
+
+      this.$resource('/invoice/byDate').save({},message2).then(result =>
           result.json().then(data => {
             this.invoices.push(data);
           })
       )
 
+    },
+    input() {
+      this.show = true;
+    },
+    exitForm() {
+      this.show = false
     }
   },
   created() {
@@ -153,17 +169,42 @@ export default {
 </script>
 
 <style scoped>
-.search_form{
-  border: 1px solid black;
-  height: 100px;
+
+.parent_input{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top:0;
+  overflow: hidden;
+  scroll-x: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:  rgba(64, 72, 100, 0.55);;
+ /* background: white;
+  margin-left: 10px;
+  !*border: 1px solid black;*!
+  border-radius: 5px;
+  width: 300px;
+  height: 300px;
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.38);*/
+
 }
-.input_save, .edit{
-  width: 50px;
+.input_name, .input_Sum, .input_Date{
+  height: 30px;
+  width: 150px;
+  border: none;
+  background: rgba(211, 214, 218, 0.63);
+}
+.input_save {
+  width: 100px;
+  height: 30px;
   background: rgba(21, 148, 21, 0.29);
   border: none;
   border-radius: 5px;
 }
-.input_save:hover, .edit:hover{
+.input_save:hover{
   background: rgba(25, 178, 25, 0.63);
 }
 .input_exit, .del{
@@ -176,31 +217,64 @@ export default {
   background-color: rgba(255, 0, 0, 0.8);
 }
 .input{
-  margin-left: 60px;
-  margin-top: 5px;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
   /*border: 1px solid black;*/
-}
-.name{
-  width: 930px;
+
+  background: white;
+  margin-left: 10px;
+  /*border: 1px solid black;*/
+  border-radius: 5px;
+  width: 350px;
+  height: 200px;
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.38);
 }
 .input *{
-  height: 30px;
+  margin-top: 5px;
+  margin-left: 5px;
+  /*border: 1px solid black;*/
 }
+
 th {
-  border: 1px solid black;
+  color: rgba(107, 106, 106, 0.54);
+  text-align: start;
 }
 td{
-  border: 1px solid #d2d2d2;
+  border-bottom: 1px solid #d2d2d2;
+  /*padding-left: 5px;*/
 }
 table{
   width: 100%;
   margin-top: 5px;
+}
+tr:hover{
+  background: rgba(189, 200, 232, 0.37);
 }
 .tdSum, .tdDate, .tdBtn{
   width: 100px;
 }
 .tdId{
   width: 50px;
+}
+.create_btn{
+  margin-top: 5px;
+  background: rgba(23, 73, 196, 0.83);
+  border: none;
+  border-radius: 3px;
+  padding: 5px;
+  color: white;
+  width: 100px;
+  height: 30px;
+}
+.input_exit_div{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+}
+*{
+  font-family: "Trebuchet MS";
 }
 </style>

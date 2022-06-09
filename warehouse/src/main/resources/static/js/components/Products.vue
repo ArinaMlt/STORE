@@ -42,15 +42,17 @@ export default {
 
 .column_data_product {
   display: inline-flex;
-  margin-left: 27px;
+  margin-left: 35px;
   /*border: 1px solid black;*/
+  border-bottom: 1px solid rgba(133, 133, 133, 0.53);
+
   margin-top: 2px;
   border-radius: 5px;
 }
 .column_data_product * {
   border: 1px solid black;
   padding: 5px;
-  margin-right: 5px;
+  /*margin-right: 5px;*/
 }
 /*.column_data_product_ID{
   width: 30px;
@@ -59,7 +61,7 @@ export default {
   width: 100px;
 }
 .column_data_product_Name{
-  width: 700px;
+  width: 500px;
 }
 
 .products {

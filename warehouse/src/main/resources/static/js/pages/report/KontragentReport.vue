@@ -2,7 +2,15 @@
 <div>
   <Header></Header>
 
+  <div>
+    <p>Найти приходы по контрагенту</p>
+    <p>Contragent.id = 2</p>
+    <input type="button" value="Поиск по контрагенту" @click="contragent">
+  </div>
+
+
   <div>Найти конрагентов по имени:</div>
+
   <form method="post" action="contragent/filter">
     <input type="text" placeholder="Input name" v-model="text">
     <input type="button" value="save" @click="save">
@@ -15,7 +23,7 @@
       </div>
     </div>
   </form>
-
+<!--
   <div class="search">
     <table >
       <tr>
@@ -31,9 +39,11 @@
         <td>{{ message.address }}</td>
       </tr>
     </table>
-  </div>
 
-  <div>
+  </div>
+  -->
+
+<!--  <div>
     <p><input type="text" v-model="name" placeholder="Введите имя"/></p>
     <ul>
       <li v-for="message in filteredList">
@@ -49,7 +59,7 @@
       <p> List1 : {{messages.length}}</p>
       <div></div>
     </div>
-  </div>
+  </div>-->
 
 </div>
 </template>
@@ -70,7 +80,8 @@ export default {
       ],
       name: '',
       inn: '',
-      address: ''
+      address: '',
+      invoices: [],
     }
   },
   // created() {
@@ -110,8 +121,19 @@ export default {
             this.text = ''
           })
       )
+    },
+    contragent() {
+      var contragent = {
+        id: 2
+      };
+      this.$resource('/invoice/byContragent').save({}, contragent).then(result =>
+          result.json().then(data => {
+            this.invoices.push(data);
+          })
+      )
     }
   }
+
 }
 </script>
 

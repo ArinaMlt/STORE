@@ -1,14 +1,17 @@
 package com.diplom.warehouse.domain;
 
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
-@ToString(of = {"id","name", "inn", "address"})
+//@ToString(of = {"id","name", "inn", "address"})
+@Data
 @EqualsAndHashCode(of = {"id"})
 public class Contragent {
     @Id
@@ -19,46 +22,8 @@ public class Contragent {
     private String inn;
     private String address;
 
-    public Contragent(){
-    }
-
-    public Contragent(String name, String inn, String address){
-        this.name = name;
-        this.inn = inn;
-        this.address = address;
-    }
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getInn() {
-        return inn;
-    }
-
-    public void setInn(String inn) {
-        this.inn = inn;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
+    @OneToMany(mappedBy = "contragent", orphanRemoval = true)
+    private List<Nomenclature> nomenclatures;
 
 }
 

@@ -10,7 +10,6 @@ import store from 'store/store'
 
 // Vue.use(VueResource)
 
-
 new Vue({
     el: '#app',
     store,

@@ -54,25 +54,18 @@ export default {
 }
 .column_data_product {
   display: inline-flex;
-  /*margin-left: 2px;*/
-  /*border: 1px solid black;*/
-  /*margin-top: 2px;*/
-  /*border-radius: 5px;*/
 }
 .column_data_product:hover{
   background: rgba(220, 220, 220, 0.34);
 }
 .column_data_product * {
-  border: 1px solid #bebebe;
+  border-bottom: 1px solid rgba(190, 190, 190, 0.39);
   padding: 2px;
   margin-left: 2px;
   margin-bottom: 0px;
   height: 20px;
 }
 
-/*.column_data_product_ID{
-  width: 30px;
-}*/
 .column_data_product_Amount, .column_data_product_Price{
   width: 100px;
 }
@@ -81,17 +74,12 @@ export default {
 }
 
 .products {
-  /*border: 1px solid red;*/
-  /*padding: 10px;*/
   display: flex;
   flex-direction: column;
-  /*max-height: 150px;*/
-  /*overflow: hidden;*/
-  /*overflow-y: scroll;*/
 }
-
-
-/*.products_column * {*/
-/*  padding-left: 10px;*/
-/*}*/
+input{
+  border: none;
+  border-radius: 3px;
+  padding: 5px;
+}
 </style>

@@ -1,12 +1,10 @@
 package com.diplom.warehouse.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Table
@@ -23,9 +21,9 @@ public class Product {
     private Contragent contragent;*/
 
     private String productName;
-    private String productAmount;
-    private String productPrice;
-    private Integer productValue;
+    private Double productAmount;
+    private Double productPrice;
+    private Double productValue;
 
    /* @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate date;*/
@@ -51,19 +49,19 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getProductAmount() {
+    public Double getProductAmount() {
         return productAmount;
     }
 
-    public void setProductAmount(String productAmount) {
+    public void setProductAmount(Double productAmount) {
         this.productAmount = productAmount;
     }
 
-    public String getProductPrice() {
+    public Double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(String productPrice) {
+    public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
     }
 
@@ -77,11 +75,11 @@ public class Product {
         this.invoice = invoice;
     }
 
-    public Integer getProductValue() {
+    public Double getProductValue() {
         return productValue;
     }
 
-    public void setProductValue(Integer productValue) {
+    public void setProductValue(Double productValue) {
         this.productValue = productValue;
     }
 }

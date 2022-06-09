@@ -11,6 +11,7 @@ import Check from "../pages/Check.vue"
 import KontragentReport from "../pages/report/KontragentReport.vue";
 import Invoice from "../pages/Invoice.vue";
 import PricesReport from "../pages/report/PricesReport.vue";
+import Payment from "../pages/Payment.vue";
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,7 @@ export default new VueRouter({
         { path: '/contragents', component: Contragent},
         { path: '/prices', component: PricesReport},
         { path: '/invoices', component: Invoice},
+        { path: '/payments', component: Payment},
         { path: '/report', component: Report},
         { path: '/kontragentReport', component: KontragentReport},
         { path: '*', component: MessageList},
