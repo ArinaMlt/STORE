@@ -1,8 +1,8 @@
-# Java - STORE
+# STORE
 
 <!-- <h3>This file is under development. Give me some time, I'll finish it<h3> -->
   
-  ### (Java) ИНФОРМАЦИОННАЯ СИСТЕМА ДЛЯ ОБЕСПЕЧЕНИЯ АВТОМАТИЗАЦИИ УПРАВЛЕНИЯ СКЛАДСКИМИ РАБОТАМИ ПРОФИЛЬНОГО ПРЕДПРИЯТИЯ
+  ### ИНФОРМАЦИОННАЯ СИСТЕМА ДЛЯ ОБЕСПЕЧЕНИЯ АВТОМАТИЗАЦИИ УПРАВЛЕНИЯ СКЛАДСКИМИ РАБОТАМИ ПРОФИЛЬНОГО ПРЕДПРИЯТИЯ
   
   
 <!-- <img width="465" alt="image" src="https://user-images.githubusercontent.com/79594454/223082982-95e5e781-9e52-40cd-ac56-25f706d5eef4.png"> -->
